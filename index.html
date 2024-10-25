@@ -13,11 +13,10 @@
     }
     #game-scene {
       position: relative;
-      width: 1024px;  <!-- Adjust the size to your image's actual dimensions -->
-      height: 768px;
-      background: url('https://magnanimosity.github.io/Wilmington-Hidden-Objects/wilmington-dogs-bw-scene.png') no-repeat center/cover;
+      width: 1024px;  /* Set this width to match your image dimensions */
+      height: 768px;  /* Set this height to match your image dimensions */
+      background: url('wilmington-dogs-bw-scene.png') no-repeat center/cover;
       filter: grayscale(100%);
-      transition: filter 0.3s ease;
     }
     #score {
       margin: 10px;
@@ -36,42 +35,37 @@
   <button id="hint">Hint</button>
 
   <div id="game-scene">
-    <!-- Your image with mapped clickable regions -->
-    <img src="wilmington-dogs-bw-scene.png" alt="Wilmington Scene" usemap="#image-map" width="1024" height="768">
+    <img src="wilmington-dogs-bw-scene.png" alt="Wilmington Scene" usemap="#dogmap" width="1024" height="768">
     
-    <!-- Image map for clickable areas based on the regions you provided -->
-    <map name="image-map">
-      <!-- Dog 1 clickable area -->
-      <area shape="poly" coords="317,936,316,944,287,958,291,990,310,996,334,989,349,1007,371,991,381,955,379,930,389,902,383,872,356,877,332,875,320,895" 
-            href="#" onclick="foundDog(1)">
-      
-      <!-- Dog 2 clickable area -->
-      <area shape="poly" coords="435,900,412,867,430,913,415,981,439,958,455,978,465,948,507,956,509,990,528,982,526,951,542,897,561,885,573,872,556,863,538,850,469,906" 
-            href="#" onclick="foundDog(2)">
-      
-      <!-- You can continue adding more mapped dogs in a similar format -->
+    <!-- Image map for clickable areas -->
+    <map name="dogmap">
+      <!-- Example clickable areas for each dog -->
+      <area shape="poly" coords="317,936,316,944,287,958,291,990,310,996,334,989,349,1007,371,991,381,955,379,930,389,902,383,872,356,877,332,875,320,895" href="#" onclick="foundDog(1)">
+      <area shape="poly" coords="435,900,412,867,430,913,415,981,439,958,455,978,465,948,507,956,509,990,528,982,526,951,542,897,561,885,573,872,556,863,538,850,469,906" href="#" onclick="foundDog(2)">
+      <!-- Continue adding more mapped dogs here -->
     </map>
   </div>
 
   <script>
     let score = 0;
     let foundDogs = 0;
-    const totalDogs = 50;  // Adjust this number to the actual total number of dogs
+    const totalDogs = 50;  // Update this to the total number of dogs you have
     const scoreDisplay = document.getElementById("score");
 
     // Function to handle finding a dog
     function foundDog(dogId) {
-      const dogElement = document.querySelector(`area[onclick="foundDog(${dogId})"]`);
+      const dogArea = document.querySelector(`area[onclick="foundDog(${dogId})"]`);
       
-      if (dogElement && !dogElement.classList.contains('found')) {
-        dogElement.classList.add('found');  // Mark dog as found
+      if (dogArea && !dogArea.classList.contains('found')) {
+        dogArea.classList.add('found');  // Mark the dog as found
         score += 10;
         foundDogs += 1;
         scoreDisplay.textContent = `Score: ${score} (Found: ${foundDogs}/${totalDogs})`;
 
-        // Disable the clickable area after found
-        dogElement.removeAttribute('onclick');
+        // Disable the clickable area for this dog
+        dogArea.removeAttribute('onclick');
 
+        // Check if all dogs are found
         if (foundDogs === totalDogs) {
           alert("Congratulations! You found all the dogs!");
         }
