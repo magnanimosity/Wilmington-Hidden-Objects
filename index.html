@@ -13,8 +13,8 @@
     }
     #game-scene {
       position: relative;
-      width: 800px;
-      height: 600px;
+      width: 1024px;  <!-- Adjust the size to your image's actual dimensions -->
+      height: 768px;
       background: url('https://magnanimosity.github.io/Wilmington-Hidden-Objects/wilmington-dogs-bw-scene.png') no-repeat center/cover;
       filter: grayscale(100%);
       transition: filter 0.3s ease;
@@ -36,23 +36,27 @@
   <button id="hint">Hint</button>
 
   <div id="game-scene">
-    <!-- The image with the hidden dogs, with an image map overlay -->
-    <img src="wilmington-dogs-bw-scene.png" alt="Wilmington Scene" usemap="#dogmap" width="800" height="600">
+    <!-- Your image with mapped clickable regions -->
+    <img src="wilmington-dogs-bw-scene.png" alt="Wilmington Scene" usemap="#image-map" width="1024" height="768">
     
-    <!-- Image map: Define clickable areas using coordinates -->
-    <map name="dogmap">
-      <!-- Example clickable area for Dog 1: adjust the coordinates to match the dog's location and shape -->
-      <area shape="poly" coords="120,150,135,160,130,180,115,175" href="#" onclick="foundDog(1)">
-      <!-- Example clickable area for Dog 2: adjust as needed -->
-      <area shape="poly" coords="250,300,260,320,240,325,230,310" href="#" onclick="foundDog(2)">
-      <!-- Continue adding areas for each dog -->
+    <!-- Image map for clickable areas based on the regions you provided -->
+    <map name="image-map">
+      <!-- Dog 1 clickable area -->
+      <area shape="poly" coords="317,936,316,944,287,958,291,990,310,996,334,989,349,1007,371,991,381,955,379,930,389,902,383,872,356,877,332,875,320,895" 
+            href="#" onclick="foundDog(1)">
+      
+      <!-- Dog 2 clickable area -->
+      <area shape="poly" coords="435,900,412,867,430,913,415,981,439,958,455,978,465,948,507,956,509,990,528,982,526,951,542,897,561,885,573,872,556,863,538,850,469,906" 
+            href="#" onclick="foundDog(2)">
+      
+      <!-- You can continue adding more mapped dogs in a similar format -->
     </map>
   </div>
 
   <script>
     let score = 0;
     let foundDogs = 0;
-    const totalDogs = 50;  // Adjust this number if needed
+    const totalDogs = 50;  // Adjust this number to the actual total number of dogs
     const scoreDisplay = document.getElementById("score");
 
     // Function to handle finding a dog
@@ -74,7 +78,7 @@
       }
     }
 
-    // Hint system (optional): Briefly highlight a random unfound dog area
+    // Optional: Hint system to highlight a random unfound dog
     document.getElementById("hint").addEventListener("click", () => {
       const unfoundDogs = document.querySelectorAll('area:not(.found)');
       if (unfoundDogs.length > 0) {
