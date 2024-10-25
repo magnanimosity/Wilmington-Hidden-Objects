@@ -15,19 +15,9 @@
       position: relative;
       width: 800px;
       height: 600px;
-      border: 2px solid #333;
       background: url('https://magnanimosity.github.io/Wilmington-Hidden-Objects/wilmington-dogs-bw-scene.png') no-repeat center/cover;
       filter: grayscale(100%);
       transition: filter 0.3s ease;
-    }
-    .hidden-object {
-      position: absolute;
-      cursor: pointer;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background-color: transparent;  /* Make the clickable areas invisible */
-      z-index: 10;
     }
     #score {
       margin: 10px;
@@ -44,14 +34,19 @@
   <h1>Discover Wilmington: Find All the Hidden Dogs!</h1>
   <div id="score">Score: 0 (Found: 0/50)</div>
   <button id="hint">Hint</button>
+
   <div id="game-scene">
-    <!-- Hidden dogs: Replace the positions with actual dog coordinates -->
-    <div class="hidden-object" id="hidden-dog-1" style="top: 150px; left: 120px;"></div>
-    <div class="hidden-object" id="hidden-dog-2" style="top: 300px; left: 250px;"></div>
-    <div class="hidden-object" id="hidden-dog-3" style="top: 450px; left: 400px;"></div>
-    <div class="hidden-object" id="hidden-dog-4" style="top: 500px; left: 600px;"></div>
-    <div class="hidden-object" id="hidden-dog-5" style="top: 200px; left: 500px;"></div>
-    <!-- Continue adding hidden dog divs with proper coordinates -->
+    <!-- The image with the hidden dogs, with an image map overlay -->
+    <img src="wilmington-dogs-bw-scene.png" alt="Wilmington Scene" usemap="#dogmap" width="800" height="600">
+    
+    <!-- Image map: Define clickable areas using coordinates -->
+    <map name="dogmap">
+      <!-- Example clickable area for Dog 1: adjust the coordinates to match the dog's location and shape -->
+      <area shape="poly" coords="120,150,135,160,130,180,115,175" href="#" onclick="foundDog(1)">
+      <!-- Example clickable area for Dog 2: adjust as needed -->
+      <area shape="poly" coords="250,300,260,320,240,325,230,310" href="#" onclick="foundDog(2)">
+      <!-- Continue adding areas for each dog -->
+    </map>
   </div>
 
   <script>
@@ -59,37 +54,33 @@
     let foundDogs = 0;
     const totalDogs = 50;  // Adjust this number if needed
     const scoreDisplay = document.getElementById("score");
-    const hintButton = document.getElementById("hint");
 
-    // Attach click event to each dog and track found status
-    for (let i = 1; i <= totalDogs; i++) {
-      const dog = document.getElementById(`hidden-dog-${i}`);
+    // Function to handle finding a dog
+    function foundDog(dogId) {
+      const dogElement = document.querySelector(`area[onclick="foundDog(${dogId})"]`);
+      
+      if (dogElement && !dogElement.classList.contains('found')) {
+        dogElement.classList.add('found');  // Mark dog as found
+        score += 10;
+        foundDogs += 1;
+        scoreDisplay.textContent = `Score: ${score} (Found: ${foundDogs}/${totalDogs})`;
 
-      dog.addEventListener("click", (event) => {
-        event.stopPropagation();  // Ensure no other element intercepts the click
-        if (!dog.classList.contains('found')) {  // Ensure dog hasn't been clicked already
-          dog.classList.add('found');  // Mark as found
-          dog.style.pointerEvents = "none";  // Disable further clicks on this dog
-          score += 10;
-          foundDogs += 1;
-          scoreDisplay.textContent = `Score: ${score} (Found: ${foundDogs}/${totalDogs})`;
+        // Disable the clickable area after found
+        dogElement.removeAttribute('onclick');
 
-          // If all dogs are found, show a congratulatory message
-          if (foundDogs === totalDogs) {
-            alert("Congratulations! You found all the dogs!");
-          }
+        if (foundDogs === totalDogs) {
+          alert("Congratulations! You found all the dogs!");
         }
-      });
+      }
     }
 
-    // Hint system: briefly highlight a random unfound dog
-    hintButton.addEventListener("click", () => {
-      const unfoundDogs = Array.from(document.querySelectorAll('.hidden-object'))
-        .filter(dog => !dog.classList.contains('found'));
+    // Hint system (optional): Briefly highlight a random unfound dog area
+    document.getElementById("hint").addEventListener("click", () => {
+      const unfoundDogs = document.querySelectorAll('area:not(.found)');
       if (unfoundDogs.length > 0) {
         const randomDog = unfoundDogs[Math.floor(Math.random() * unfoundDogs.length)];
-        randomDog.style.backgroundColor = "rgba(255, 0, 0, 0.5)"; // Highlight the object
-        setTimeout(() => randomDog.style.backgroundColor = "transparent", 1000);
+        randomDog.style.outline = "2px solid red";
+        setTimeout(() => randomDog.style.outline = "none", 1000);
       }
     });
   </script>
