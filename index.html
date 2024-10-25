@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,8 +26,8 @@
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      background-color: rgba(255, 0, 0, 0.5);
-      display: none; /* Hidden initially to rely on clicks */
+      background-color: rgba(255, 0, 0, 0.5); /* Just a temporary highlight */
+      z-index: 10;
     }
     #score {
       margin: 10px;
@@ -43,154 +42,53 @@
 </head>
 <body>
   <h1>Discover Wilmington: Find All the Hidden Dogs!</h1>
-  <div id="score">Score: 0</div>
+  <div id="score">Score: 0 (Found: 0/50)</div>
   <button id="hint">Hint</button>
   <div id="game-scene">
-    <!-- Dog positions are dynamically set with styling for transition -->
-    
-    <div class="hidden-object" id="hidden-dog-1" style="top: 527px; left: 619px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-2" style="top: 176px; left: 404px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-3" style="top: 342px; left: 171px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-4" style="top: 242px; left: 10px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-5" style="top: 299px; left: 634px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-6" style="top: 396px; left: 584px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-7" style="top: 90px; left: 727px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-8" style="top: 319px; left: 313px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-9" style="top: 400px; left: 52px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-10" style="top: 139px; left: 200px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-11" style="top: 249px; left: 294px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-12" style="top: 294px; left: 670px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-13" style="top: 248px; left: 218px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-14" style="top: 140px; left: 225px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-15" style="top: 468px; left: 178px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-16" style="top: 313px; left: 346px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-17" style="top: 256px; left: 351px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-18" style="top: 515px; left: 60px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-19" style="top: 339px; left: 629px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-20" style="top: 281px; left: 289px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-21" style="top: 281px; left: 97px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-22" style="top: 497px; left: 179px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-23" style="top: 395px; left: 525px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-24" style="top: 60px; left: 266px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-25" style="top: 180px; left: 300px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-26" style="top: 146px; left: 209px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-27" style="top: 432px; left: 402px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-28" style="top: 284px; left: 569px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-29" style="top: 543px; left: 108px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-30" style="top: 326px; left: 292px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-31" style="top: 135px; left: 324px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-32" style="top: 533px; left: 645px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-33" style="top: 354px; left: 382px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-34" style="top: 406px; left: 15px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-35" style="top: 260px; left: 403px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-36" style="top: 446px; left: 75px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-37" style="top: 192px; left: 47px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-38" style="top: 340px; left: 362px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-39" style="top: 259px; left: 265px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-40" style="top: 470px; left: 657px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-41" style="top: 114px; left: 624px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-42" style="top: 148px; left: 647px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-43" style="top: 198px; left: 46px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-44" style="top: 402px; left: 90px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-45" style="top: 375px; left: 472px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-46" style="top: 198px; left: 332px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-47" style="top: 490px; left: 617px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-48" style="top: 477px; left: 412px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-49" style="top: 532px; left: 143px;"></div>
-    
-    <div class="hidden-object" id="hidden-dog-50" style="top: 172px; left: 584px;"></div>
-    
+    <!-- Hidden dogs: Replace the positions with actual dog coordinates -->
+    <div class="hidden-object" id="hidden-dog-1" style="top: 150px; left: 120px;"></div>
+    <div class="hidden-object" id="hidden-dog-2" style="top: 300px; left: 250px;"></div>
+    <div class="hidden-object" id="hidden-dog-3" style="top: 450px; left: 400px;"></div>
+    <div class="hidden-object" id="hidden-dog-4" style="top: 500px; left: 600px;"></div>
+    <div class="hidden-object" id="hidden-dog-5" style="top: 200px; left: 500px;"></div>
+    <!-- Continue adding hidden dog divs with proper coordinates -->
   </div>
 
   <script>
     let score = 0;
+    let foundDogs = 0;
+    const totalDogs = 50;  // Adjust this number if needed
     const scoreDisplay = document.getElementById("score");
     const hintButton = document.getElementById("hint");
-    const totalDogs = 50;
-    let foundDogs = 0;
 
+    // Attach click event to each dog and track found status
     for (let i = 1; i <= totalDogs; i++) {
       const dog = document.getElementById(`hidden-dog-${i}`);
-      dog.style.display = "block";
-      dog.addEventListener("click", () => {
-        dog.style.backgroundColor = "transparent"; // Remove highlight on found
-        const areaColorDiv = document.createElement("div");
-        areaColorDiv.style.position = "absolute";
-        areaColorDiv.style.top = dog.style.top;
-        areaColorDiv.style.left = dog.style.left;
-        areaColorDiv.style.width = "60px"; // Coverage area in color
-        areaColorDiv.style.height = "60px";
-        areaColorDiv.style.borderRadius = "50%";
-        areaColorDiv.style.backgroundColor = "transparent";
-        areaColorDiv.style.pointerEvents = "none";
-        areaColorDiv.style.zIndex = "10";
-        areaColorDiv.style.filter = "none"; // Color reveal for found dog
-        document.getElementById("game-scene").appendChild(areaColorDiv);
-        
-        score += 10;
-        foundDogs += 1;
-        scoreDisplay.textContent = `Score: ${score} (Found: ${foundDogs}/${totalDogs})`;
-        if (foundDogs === totalDogs) {
-          alert("Congratulations! You found all the dogs!");
+
+      dog.addEventListener("click", (event) => {
+        event.stopPropagation();  // Ensure no other element intercepts the click
+        if (!dog.classList.contains('found')) {  // Ensure dog hasn't been clicked already
+          dog.classList.add('found');  // Mark as found
+          dog.style.backgroundColor = "transparent";  // Remove highlight on found
+          score += 10;
+          foundDogs += 1;
+          scoreDisplay.textContent = `Score: ${score} (Found: ${foundDogs}/${totalDogs})`;
+
+          // If all dogs are found, show a congratulatory message
+          if (foundDogs === totalDogs) {
+            alert("Congratulations! You found all the dogs!");
+          }
         }
       });
     }
 
-    // Hint button
+    // Hint system: briefly highlight a random unfound dog
     hintButton.addEventListener("click", () => {
       const unfoundDogs = Array.from(document.querySelectorAll('.hidden-object'))
-        .filter(dog => dog.style.backgroundColor !== "transparent");
+        .filter(dog => !dog.classList.contains('found'));
       if (unfoundDogs.length > 0) {
         const randomDog = unfoundDogs[Math.floor(Math.random() * unfoundDogs.length)];
-        randomDog.style.backgroundColor = "rgba(255, 0, 0, 0.5)"; // Briefly highlight the object
+        randomDog.style.backgroundColor = "rgba(255, 0, 0, 0.5)"; // Highlight the object
         setTimeout(() => randomDog.style.backgroundColor = "transparent", 1000);
       }
     });
