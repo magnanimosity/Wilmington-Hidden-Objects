@@ -26,7 +26,7 @@
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      background-color: rgba(255, 0, 0, 0.5); /* Just a temporary highlight */
+      background-color: transparent;  /* Make the clickable areas invisible */
       z-index: 10;
     }
     #score {
@@ -69,7 +69,7 @@
         event.stopPropagation();  // Ensure no other element intercepts the click
         if (!dog.classList.contains('found')) {  // Ensure dog hasn't been clicked already
           dog.classList.add('found');  // Mark as found
-          dog.style.backgroundColor = "transparent";  // Remove highlight on found
+          dog.style.pointerEvents = "none";  // Disable further clicks on this dog
           score += 10;
           foundDogs += 1;
           scoreDisplay.textContent = `Score: ${score} (Found: ${foundDogs}/${totalDogs})`;
